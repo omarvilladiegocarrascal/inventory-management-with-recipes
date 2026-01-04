@@ -7,6 +7,24 @@ CREATE TYPE role_types AS ENUM (
     'ROOT'
 );
 
+CREATE TYPE movement_types AS ENUM (
+    'IN',
+    'OUT',
+    'DAMAGED',
+    'EXPIRED',
+    'RETURNED_IN',
+    'RETURNED_OUT'
+    'ADJUSTMENT'
+);
+
+CREATE TYPE sales_types AS ENUM (
+    'PRENDING',
+    'CANCELLED',
+    'COMPLETED'
+);
+
+
+
 CREATE TABLE IF NOT EXISTS public.users
 (
     id uuid NOT NULL,
