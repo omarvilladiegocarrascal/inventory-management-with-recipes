@@ -6,7 +6,11 @@ export class CreateRecipeDto {
   @MaxLength(200)
   name: string;
 
-  @ApiProperty({ description: 'Description of the recipe', required: false, maxLength: 400 })
+  @ApiProperty({
+    description: 'Description of the recipe',
+    required: false,
+    maxLength: 400,
+  })
   @IsString()
   @IsOptional()
   @MaxLength(400)

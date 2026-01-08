@@ -11,7 +11,9 @@ describe('UsersRefreshTokensController', () => {
       providers: [UsersRefreshTokensService],
     }).compile();
 
-    controller = module.get<UsersRefreshTokensController>(UsersRefreshTokensController);
+    controller = module.get<UsersRefreshTokensController>(
+      UsersRefreshTokensController,
+    );
   });
 
   it('should be defined', () => {

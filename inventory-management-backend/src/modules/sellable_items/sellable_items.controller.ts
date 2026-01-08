@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { SellableItemsService } from './sellable_items.service';
 import { CreateSellableItemDto } from './dto/create-sellable_item.dto';
 import { UpdateSellableItemDto } from './dto/update-sellable_item.dto';
@@ -23,7 +31,10 @@ export class SellableItemsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSellableItemDto: UpdateSellableItemDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateSellableItemDto: UpdateSellableItemDto,
+  ) {
     return this.sellableItemsService.update(+id, updateSellableItemDto);
   }
 

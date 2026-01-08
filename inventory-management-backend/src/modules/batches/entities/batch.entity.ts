@@ -1,11 +1,35 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsUUID, IsInt, Min, IsDateString, IsString, IsOptional, IsBoolean, IsDate } from 'class-validator';
+import {
+  IsUUID,
+  IsInt,
+  Min,
+  IsDateString,
+  IsString,
+  IsOptional,
+  IsBoolean,
+  IsDate,
+} from 'class-validator';
+import { StockMovement } from 'src/modules/stock_movements/entities/stock_movement.entity';
+import { Product } from 'src/modules/products/entities/product.entity';
+import { v4 as uuidv4 } from 'uuid';
+import { CostPrice } from 'src/modules/cost_prices/entities/cost_price.entity';
 @Entity({ name: 'batch' })
 export class Batch {
-  @ApiProperty({ description: 'Unique identifier for the batch', format: 'uuid' })
+  @ApiProperty({
+    description: 'Unique identifier for the batch',
+    format: 'uuid',
+  })
+  @IsUUID()
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: string = uuidv4();
 
   @ApiProperty({ description: 'Current quantity in the batch', minimum: 0 })
   @IsInt()
@@ -13,7 +37,10 @@ export class Batch {
   @Column({ type: 'int' })
   quantity: number;
 
-  @ApiProperty({ description: 'Initial quantity when the batch was created', minimum: 1 })
+  @ApiProperty({
+    description: 'Initial quantity when the batch was created',
+    minimum: 1,
+  })
   @IsInt()
   @Min(1)
   @Column({ type: 'int', name: 'initial_quantity' })
@@ -24,7 +51,11 @@ export class Batch {
   @Column({ type: 'date', name: 'expiration_date' })
   expirationDate: Date;
 
-  @ApiProperty({ description: 'Optional reference for the batch', maxLength: 200, required: false })
+  @ApiProperty({
+    description: 'Optional reference for the batch',
+    maxLength: 200,
+    required: false,
+  })
   @IsString()
   @IsOptional()
   @Column({ type: 'varchar', length: 200, nullable: true })
@@ -35,8 +66,38 @@ export class Batch {
   @Column({ type: 'boolean', name: 'is_active' })
   isActive: boolean;
 
-  @ApiProperty({ description: 'Timestamp when the batch was created', format: 'date-time' })
+  @ApiProperty({
+    description: 'Timestamp when the batch was created',
+    format: 'date-time',
+  })
   @IsDate()
-  @CreateDateColumn({ type: 'timestamptz', name: 'created_at', default: () => 'NOW()' })
+  @CreateDateColumn({
+    type: 'timestamptz',
+    name: 'created_at',
+    default: () => 'NOW()',
+  })
   createdAt: Date;
+
+  @ApiProperty({
+    description: 'Stock movements associated with this batch',
+    type: () => [StockMovement],
+  })
+  @OneToMany(() => StockMovement, (stockMovement) => stockMovement.batch)
+  stockMovements: StockMovement[];
+
+  @ApiProperty({
+    description: 'Product associated with this batch',
+    type: () => Product,
+  })
+  @ManyToOne(() => Product, (product) => product.batches, {
+    onDelete: 'CASCADE',
+  })
+  product: Product;
+
+  @ApiProperty({
+    description: 'Cost prices associated with this batch',
+    type: () => [CostPrice],
+  })
+  @OneToMany(() => CostPrice, (costPrice) => costPrice.batch)
+  costPrices: CostPrice[];
 }
