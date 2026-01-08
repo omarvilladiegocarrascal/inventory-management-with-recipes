@@ -1,13 +1,14 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 export type RoleTypes = 'GUEST' | 'OWNER' | 'ROOT';
+import {v4 as uuidv4 } from 'uuid';
 
 @Entity({ name: 'users' })
 @Unique(['email'])
 export class User {
   @ApiProperty({ description: 'Unique identifier for the user', example: '550e8400-e29b-41d4-a716-446655440000' })
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: string = uuidv4();
 
   @ApiProperty({ description: 'Full name of the user', maxLength: 100, example: 'John Doe' })
   @Column({ type: 'varchar', length: 100, nullable: false })
