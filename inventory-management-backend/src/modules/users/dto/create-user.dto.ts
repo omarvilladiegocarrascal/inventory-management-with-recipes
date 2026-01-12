@@ -6,7 +6,6 @@ import {
   IsString,
   MaxLength,
   MinLength,
-  IsDateString,
 } from 'class-validator';
 export type RoleTypes = 'GUEST' | 'OWNER' | 'ROOT';
 
@@ -49,5 +48,5 @@ export class CreateUserDto {
     example: 'GUEST',
   })
   @IsEnum(['GUEST', 'OWNER', 'ROOT'] as RoleTypes[])
-  role: RoleTypes;
+  role?: RoleTypes;
 }

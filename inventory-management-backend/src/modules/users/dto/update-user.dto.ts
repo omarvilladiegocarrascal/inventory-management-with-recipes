@@ -9,7 +9,7 @@ import {
   IsBoolean,
   IsOptional,
 } from 'class-validator';
-import type { RoleTypes } from '../entities/user.entity';
+import type { RoleTypes } from '../types/role.types';
 export class UpdateUserDto extends PartialType(CreateUserDto) {
   @ApiPropertyOptional({
     description: 'Full name of the user',

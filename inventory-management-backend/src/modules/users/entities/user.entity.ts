@@ -8,11 +8,11 @@ import {
   OneToMany,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-export type RoleTypes = 'GUEST' | 'OWNER' | 'ROOT';
 import { v4 as uuidv4 } from 'uuid';
 import { UsersRefreshToken } from 'src/modules/users_refresh_tokens/entities/users_refresh_token.entity';
 import { Sale } from 'src/modules/sales/entities/sale.entity';
 import { StockMovement } from 'src/modules/stock_movements/entities/stock_movement.entity';
+import type { RoleTypes } from '../types/role.types';
 
 @Entity({ name: 'users' })
 @Unique(['email'])
@@ -46,12 +46,12 @@ export class User {
     writeOnly: true,
   })
   @Column({
-    name: 'password_hash',
+    name: 'password',
     type: 'varchar',
     length: 100,
     nullable: false,
   })
-  passwordHash: string;
+  password: string;
 
   @ApiProperty({
     description: 'Role assigned to the user',
@@ -80,7 +80,7 @@ export class User {
 
   @ApiProperty({
     description: 'Timestamp when the user was created',
-    example: '2023-10-01T12:00:00Z',
+    example: '2023-01-08T21:09:00-05:00',
   })
   @CreateDateColumn({
     name: 'created_at',
@@ -97,8 +97,7 @@ export class User {
   @UpdateDateColumn({
     name: 'updated_at',
     type: 'timestamptz',
-    nullable: false,
-    default: () => 'NOW()',
+    nullable: true,
   })
   updatedAt: Date;
 
