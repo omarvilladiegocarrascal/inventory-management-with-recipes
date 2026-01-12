@@ -17,34 +17,5 @@ export class UsersRefreshTokensController {
     private readonly usersRefreshTokensService: UsersRefreshTokensService,
   ) {}
 
-  @Post()
-  create(@Body() createUsersRefreshTokenDto: CreateUsersRefreshTokenDto) {
-    return this.usersRefreshTokensService.create(createUsersRefreshTokenDto);
-  }
 
-  @Get()
-  findAll() {
-    return this.usersRefreshTokensService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersRefreshTokensService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateUsersRefreshTokenDto: UpdateUsersRefreshTokenDto,
-  ) {
-    return this.usersRefreshTokensService.update(
-      +id,
-      updateUsersRefreshTokenDto,
-    );
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersRefreshTokensService.remove(+id);
-  }
 }

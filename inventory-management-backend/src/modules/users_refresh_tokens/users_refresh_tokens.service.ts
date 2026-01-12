@@ -1,26 +1,64 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUsersRefreshTokenDto } from './dto/create-users_refresh_token.dto';
-import { UpdateUsersRefreshTokenDto } from './dto/update-users_refresh_token.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
+import { UsersRefreshToken } from './entities/users_refresh_token.entity';
+import { User } from '../users/entities/user.entity';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UsersRefreshTokensService {
-  create(createUsersRefreshTokenDto: CreateUsersRefreshTokenDto) {
-    return 'This action adds a new usersRefreshToken';
+  constructor(
+    @InjectRepository(UsersRefreshToken)
+    private usersRefreshTokenRepository: Repository<UsersRefreshToken>,
+    private jwtService: JwtService,
+  ) {}
+
+  async create(user: User): Promise<UsersRefreshToken> {
+    const payload = { sub: user.id, jti: uuidv4() };
+    const token = this.jwtService.sign(payload, {
+      expiresIn: '1h',
+    });
+    const expiredAt = new Date();
+    expiredAt.setDate(expiredAt.getDate() + 7);
+
+    
+
+    const refreshToken = this.usersRefreshTokenRepository.create({
+      token,
+      user,
+      expiredAt,
+    });
+
+    return this.usersRefreshTokenRepository.save(refreshToken);
   }
 
-  findAll() {
-    return `This action returns all usersRefreshTokens`;
+  async findByToken(token: string): Promise<UsersRefreshToken | null> {
+    return this.usersRefreshTokenRepository.findOne({
+      where: { token },
+      relations: ['user'],
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} usersRefreshToken`;
+  async revokeToken(token: string): Promise<void> {
+    await this.usersRefreshTokenRepository.update(
+      { token },
+      { revokedAt: new Date() },
+    );
   }
 
-  update(id: number, updateUsersRefreshTokenDto: UpdateUsersRefreshTokenDto) {
-    return `This action updates a #${id} usersRefreshToken`;
+  async revokeAllUserTokens(userId: string): Promise<void> {
+    await this.usersRefreshTokenRepository.update(
+      { user: { id: userId } },
+      { revokedAt: new Date() },
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} usersRefreshToken`;
+  async deleteExpiredTokens(): Promise<void> {
+    await this.usersRefreshTokenRepository
+      .createQueryBuilder()
+      .delete()
+      .where('expired_at < :now', { now: new Date() })
+      .execute();
   }
 }

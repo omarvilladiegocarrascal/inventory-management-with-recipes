@@ -20,7 +20,7 @@ export class UsersRefreshToken {
   id: string = uuidv4();
 
   @ApiProperty({ description: 'The refresh token string', maxLength: 200 })
-  @Column({ type: 'varchar', length: 200 })
+  @Column({ type: 'varchar', length: 500 })
   token: string;
 
   @ApiProperty({
@@ -49,6 +49,7 @@ export class UsersRefreshToken {
     default: () => 'NOW()',
   })
   createdAt: Date;
+
 
   @ManyToOne(() => User, (user) => user.refreshTokens, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
