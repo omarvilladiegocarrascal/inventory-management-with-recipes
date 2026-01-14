@@ -8,7 +8,7 @@ import { UsersModule } from './modules/users/users.module';
 import { BatchesModule } from './modules/batches/batches.module';
 import { CostPricesModule } from './modules/cost_prices/cost_prices.module';
 import { ProductSuppliersModule } from './modules/product_suppliers/product_suppliers.module';
-import { ProductUnitModule } from './modules/product_unit/product_unit.module';
+import { ProductUnitModule } from './modules/product_units/product_unit.module';
 import { ProductsModule } from './modules/products/products.module';
 import { RecipeModule } from './modules/recipe/recipe.module';
 import { RecipeProductsModule } from './modules/recipe_products/recipe_products.module';
@@ -17,11 +17,12 @@ import { SaleItemsModule } from './modules/sale_items/sale_items.module';
 import { SalePricesModule } from './modules/sale_prices/sale_prices.module';
 import { SellableItemsModule } from './modules/sellable_items/sellable_items.module';
 import { StockMovementsModule } from './modules/stock_movements/stock_movements.module';
-import { SupplierProductModule } from './modules/supplier_product/supplier_product.module';
+import { SupplierProductModule } from './modules/supplier_products/supplier_product.module';
 import { SuppliersModule } from './modules/suppliers/suppliers.module';
 import { UnitsModule } from './modules/units/units.module';
 import { UsersRefreshTokensModule } from './modules/users_refresh_tokens/users_refresh_tokens.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { FileUploadModule } from './modules/file_upload/file_upload.module';
 
 @Module({
   imports: [
@@ -51,7 +52,8 @@ import { AuthModule } from './modules/auth/auth.module';
     SuppliersModule,
     UnitsModule,
     UsersRefreshTokensModule,
-    AuthModule
+    AuthModule,
+    FileUploadModule
   ],
   controllers: [AppController],
   providers: [AppService],

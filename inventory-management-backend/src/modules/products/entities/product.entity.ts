@@ -13,8 +13,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Batch } from 'src/modules/batches/entities/batch.entity';
 import { SellableItem } from 'src/modules/sellable_items/entities/sellable_item.entity';
 import { RecipeProduct } from 'src/modules/recipe_products/entities/recipe_product.entity';
-import { SupplierProduct } from 'src/modules/supplier_product/entities/supplier_product.entity';
-import { ProductUnit } from 'src/modules/product_unit/entities/product_unit.entity';
+import { SupplierProduct } from 'src/modules/supplier_products/entities/supplier_product.entity';
+import { ProductUnit } from 'src/modules/product_units/entities/product_unit.entity';
 import { v4 as uuidv4 } from 'uuid';
 @Entity({ name: 'products' })
 export class Product {

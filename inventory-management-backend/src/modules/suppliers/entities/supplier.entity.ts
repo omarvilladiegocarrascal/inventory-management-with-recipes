@@ -7,7 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { SupplierProduct } from 'src/modules/supplier_product/entities/supplier_product.entity';
+import { SupplierProduct } from 'src/modules/supplier_products/entities/supplier_product.entity';
 import { v4 as uuidv4 } from 'uuid';
 
 @Entity({ name: 'suppliers' })

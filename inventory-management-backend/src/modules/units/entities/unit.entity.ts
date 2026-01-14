@@ -7,7 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { ProductUnit } from 'src/modules/product_unit/entities/product_unit.entity';
+import { ProductUnit } from 'src/modules/product_units/entities/product_unit.entity';
 import { v4 as uuidv4 } from 'uuid';
 @Entity({ name: 'units' })
 export class Unit {
