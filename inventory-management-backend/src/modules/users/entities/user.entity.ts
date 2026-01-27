@@ -13,6 +13,7 @@ import { UsersRefreshToken } from 'src/modules/users_refresh_tokens/entities/use
 import { Sale } from 'src/modules/sales/entities/sale.entity';
 import { StockMovement } from 'src/modules/stock_movements/entities/stock_movement.entity';
 import type { RoleTypes } from '../types/role.types';
+import { UserFile } from 'src/modules/file_upload/files_types/user_files/entities/user_file.entity';
 
 @Entity({ name: 'users' })
 @Unique(['email'])
@@ -62,6 +63,7 @@ export class User {
     type: 'enum',
     enum: ['GUEST', 'OWNER', 'ROOT'] as RoleTypes[],
     nullable: false,
+    default: 'OWNER',
   })
   role: RoleTypes;
 
@@ -118,4 +120,10 @@ export class User {
     onDelete: 'CASCADE',
   })
   stockMovements: StockMovement[];
+
+  @OneToMany(() => UserFile, (userFile) => userFile.user, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  userFiles: UserFile[];
 }

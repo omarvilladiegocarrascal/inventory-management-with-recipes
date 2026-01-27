@@ -42,11 +42,4 @@ export class CreateUserDto {
   @MaxLength(100)
   password: string;
 
-  @ApiProperty({
-    description: 'Role assigned to the user',
-    enum: ['GUEST', 'OWNER', 'ROOT'],
-    example: 'GUEST',
-  })
-  @IsEnum(['GUEST', 'OWNER', 'ROOT'] as RoleTypes[])
-  role?: RoleTypes;
 }
