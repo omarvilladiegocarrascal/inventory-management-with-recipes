@@ -4,8 +4,6 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
-  JoinColumn,
   OneToMany,
   OneToOne,
 } from 'typeorm';
@@ -16,8 +14,10 @@ import { RecipeProduct } from 'src/modules/recipe_products/entities/recipe_produ
 import { SupplierProduct } from 'src/modules/supplier_products/entities/supplier_product.entity';
 import { ProductUnit } from 'src/modules/product_units/entities/product_unit.entity';
 import { v4 as uuidv4 } from 'uuid';
+import { UserFile } from 'src/modules/file_upload/files_types/user_files/entities/user_file.entity';
+import { ProductFile } from 'src/modules/file_upload/files_types/product_files/entities/product_file.entity';
 @Entity({ name: 'products' })
-export class Product {
+export class Product  {
   @ApiProperty({
     description: 'Unique identifier for the product',
     format: 'uuid',
@@ -86,4 +86,11 @@ export class Product {
   })
   @OneToMany(() => ProductUnit, (productUnit) => productUnit.product)
   productUnits: ProductUnit[];
+
+  @ApiProperty({
+    description: 'Product files associated with this product',
+    type: () => [ProductFile],
+  })
+  @OneToMany(() => ProductFile, (productFile) => productFile.product)
+  productFiles: ProductFile[];
 }

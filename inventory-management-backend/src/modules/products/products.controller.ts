@@ -6,20 +6,31 @@ import {
   Patch,
   Param,
   Delete,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiBody, ApiConsumes, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { MinSizeValidationPipe } from '../file_upload/pipes/min_size_validation.pipe';
+import multer from 'multer';
+import { CreateProductWithFileDto } from './dto/create-product-file.dto';
 
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
-  create(@Body() createProductDto: CreateProductDto) {
-    return this.productsService.create(createProductDto);
+  @ApiBody({type: CreateProductWithFileDto})
+  @UseInterceptors(FileInterceptor('file', { storage: multer.memoryStorage() }))
+  @ApiConsumes('multipart/form-data')
+  @ApiOperation({ summary: 'Subir un archivo' })
+  @ApiResponse({ status: 201, description: 'Archivo y producto subido' })
+  create(@Body() createProductDto: CreateProductDto, @UploadedFile(new MinSizeValidationPipe()) file: Express.Multer.File) {
+    return this.productsService.create(createProductDto, file);
   }
-
   @Get()
   findAll() {
     return this.productsService.findAll();
@@ -27,7 +38,7 @@ export class ProductsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.productsService.findOne(+id);
+    return this.productsService.findOne(id);
   }
 
   @Patch(':id')

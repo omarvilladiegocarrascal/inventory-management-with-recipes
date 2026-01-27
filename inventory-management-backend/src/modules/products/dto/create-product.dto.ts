@@ -7,7 +7,7 @@ import {
   Min,
   IsUUID,
 } from 'class-validator';
-export class CreateProductDto {
+export class CreateProductDto  {
   @ApiProperty({ description: 'Name of the product' })
   @IsNotEmpty()
   @IsString()
