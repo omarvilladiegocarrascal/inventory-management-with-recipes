@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from 'uuid';
 @Entity({ name: 'units' })
 export class Unit {
   @ApiProperty({ description: 'Unique identifier for the unit', example: 1 })
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: string = uuidv4();
 
   @ApiProperty({ description: 'Name of the unit', example: 'Kilogram' })

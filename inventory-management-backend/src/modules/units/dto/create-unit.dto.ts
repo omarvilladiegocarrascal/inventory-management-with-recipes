@@ -3,7 +3,7 @@ export class CreateUnitDto {
   @IsNotEmpty()
   @IsString()
   @MaxLength(100)
-  name: string;
+  nameUnit: string;
 
   @IsNotEmpty()
   @IsString()
