@@ -1,0 +1,32 @@
+{
+  "hello_world": "Hello world",
+  "create_account": "Create Account",
+  "join_intro": "Join the kitchen revolution and start managing today.",
+  "profile_picture": "Profile Picture",
+  "full_name": "Full Name",
+  "email_address": "Email Address",
+  "login": "Log in",
+  "password": "Password",
+  "already_have_account": "Already have an account?",
+  "registration_successful": "Registration successful",
+  "terms_of_service": "Terms of Service",
+  "privacy_policy": "Privacy Policy",
+  "toggle_language": "Switch to Spanish"
+  ,"registration_failed": "Registration failed, please try again."
+  ,"create_strong_password": "Create a strong password"
+  ,"and": "and"
+  ,"examplemail": "example@mail.com"
+  ,"examplename": "julian escoffier"
+  ,"fullname": "Full name"
+  ,"profile_picture_preview": "Profile picture preview"
+  ,"choose_language_title": "Choose your language"
+  ,"choose_language_desc": "Select the language you prefer to use in the app."
+  ,"select_english": "Select English"
+  ,"select_spanish": "Select Spanish"
+  ,"current_language": "Current language",
+  "register-message-header":"Accurate",
+  "register-message-header-span":"inventory",
+  "register-message-header-smart":"Smarter business.",
+  "register-message-body":"Control your inventory, reduce waste, and know exactly where your money goes."
+
+}

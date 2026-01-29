@@ -1,0 +1,31 @@
+{
+  "hello_world": "Hola mundo",
+  "create_account": "Crear cuenta",
+  "join_intro": "Únete a la revolución culinaria y empieza a gestionar hoy.",
+  "profile_picture": "Foto de perfil",
+  "full_name": "Nombre completo",
+  "email_address": "Correo electrónico",
+  "password": "Contraseña",
+  "already_have_account": "¿Ya tienes una cuenta?",
+  "login": "Iniciar sesión",
+  "registration_successful": "Registro exitoso",
+  "terms_of_service": "Términos de Servicio",
+  "privacy_policy": "Política de Privacidad",
+  "toggle_language": "Cambiar a inglés" 
+  ,"registration_failed": "Registro fallido, por favor inténtalo de nuevo."
+  ,"create_strong_password": "Crea una contraseña fuerte"
+  ,"and": "y"
+  ,"examplemail": "mainejemplo@mail.com"
+  ,"examplename": "julia n escoffier"
+  ,"fullname": "Nombre completo"
+  ,"profile_picture_preview": "Vista previa de la foto de perfil"
+  ,"choose_language_title": "Elige tu idioma"
+  ,"choose_language_desc": "Selecciona el idioma que prefieres usar en la app."
+  ,"select_english": "Seleccionar inglés"
+  ,"select_spanish": "Seleccionar español"
+  ,"current_language": "Idioma actual",
+  "register-message-header":"Controle su ",
+  "register-message-header-span":"inventario",
+  "register-message-header-smart":"negocios más inteligentes.",
+  "register-message-body":"Controla tu inventario, reduce el desperdicio y sé exacto sobre dónde va tu dinero."
+}
