@@ -52,7 +52,8 @@ export class AuthService {
     const { refreshUserDto } = refreshTokenDto;
 
     // Find the refresh token
-    const tokenRecord = await this.usersRefreshTokensService.findByToken(refreshUserDto);
+    const tokenRecord =
+      await this.usersRefreshTokensService.findByToken(refreshUserDto);
     if (!tokenRecord) {
       throw new UnauthorizedException('Invalid refresh token');
     }
@@ -71,13 +72,15 @@ export class AuthService {
     await this.usersRefreshTokensService.revokeToken(refreshUserDto);
 
     // Create new refresh token
-    const newRefreshToken = await this.usersRefreshTokensService.create(tokenRecord.user);
+    const newRefreshToken = await this.usersRefreshTokensService.create(
+      tokenRecord.user,
+    );
 
     // Generate new access token
-    const payload = { 
-      username: tokenRecord.user.email, 
-      sub: tokenRecord.user.id, 
-      role: tokenRecord.user.role 
+    const payload = {
+      username: tokenRecord.user.email,
+      sub: tokenRecord.user.id,
+      role: tokenRecord.user.role,
     };
     const accessToken = this.jwtService.sign(payload, { secret: JWT_SECRET });
 

@@ -10,10 +10,11 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 import { v4 as uuidv4 } from 'uuid';
 import { UsersRefreshToken } from 'src/modules/users_refresh_tokens/entities/users_refresh_token.entity';
-import { Sale } from 'src/modules/sales/entities/sale.entity';
-import { StockMovement } from 'src/modules/stock_movements/entities/stock_movement.entity';
+import { Sale } from 'src/modules/sales/sales/entities/sale.entity';
+import { StockMovement } from 'src/modules/inventory/stock_movements/entities/stock_movement.entity';
+import { UserFile } from 'src/modules/files/file_upload/files_types/user_files/entities/user_file.entity';
 import type { RoleTypes } from '../types/role.types';
-import { UserFile } from 'src/modules/file_upload/files_types/user_files/entities/user_file.entity';
+import { OrganizationUser } from 'src/modules/organization_users/entities/organization_user.entity';
 
 @Entity({ name: 'users' })
 @Unique(['email'])
@@ -126,4 +127,13 @@ export class User {
     onDelete: 'CASCADE',
   })
   userFiles: UserFile[];
+  @OneToMany(
+    () => OrganizationUser,
+    (organizationUser) => organizationUser.user,
+    {
+      cascade: true,
+      onDelete: 'CASCADE',
+    },
+  )
+  organizationUsers: OrganizationUser[];
 }

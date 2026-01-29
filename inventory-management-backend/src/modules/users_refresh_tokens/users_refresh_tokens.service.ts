@@ -22,8 +22,6 @@ export class UsersRefreshTokensService {
     const expiredAt = new Date();
     expiredAt.setDate(expiredAt.getDate() + 7);
 
-    
-
     const refreshToken = this.usersRefreshTokenRepository.create({
       token,
       user,

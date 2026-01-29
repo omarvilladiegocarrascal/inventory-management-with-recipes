@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne} from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsUUID,
@@ -8,7 +14,7 @@ import {
   Min,
 } from 'class-validator';
 import { v4 as uuidv4 } from 'uuid';
-import { Batch } from 'src/modules/batches/entities/batch.entity';
+import { Batch } from 'src/modules/inventory/batches/entities/batch.entity';
 @Entity('cost_price')
 export class CostPrice {
   @ApiProperty({
@@ -51,5 +57,4 @@ export class CostPrice {
   @ManyToOne(() => Batch, (batch) => batch.costPrices)
   @JoinColumn({ name: 'batch_id' })
   batch: Batch;
-
 }

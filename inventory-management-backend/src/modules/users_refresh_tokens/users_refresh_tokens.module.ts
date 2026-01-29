@@ -6,13 +6,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UsersRefreshToken]),JwtModule.register({
-        secret: process.env.JWT_REFRESH_SECRET,
-        signOptions: { expiresIn: '1h' },
-      })],
+  imports: [
+    TypeOrmModule.forFeature([UsersRefreshToken]),
+    JwtModule.register({
+      secret: process.env.JWT_REFRESH_SECRET,
+      signOptions: { expiresIn: '1h' },
+    }),
+  ],
   controllers: [UsersRefreshTokensController],
   providers: [UsersRefreshTokensService],
 })
 export class UsersRefreshTokensModule {}
-
-

@@ -6,41 +6,42 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
   UseInterceptors,
   UploadedFile,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Roles } from '../auth/decorators/roles.decorator';
-import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from '../auth/guards/roles.guard';
+import {
+  ApiBody,
+  ApiConsumes,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import multer from 'multer';
-import { MinSizeValidationPipe } from '../file_upload/pipes/min_size_validation.pipe';
 import { CreateUserWithFileDto } from './dto/create-user-file';
-
+import { MinSizeValidationPipe } from '../files/file_upload/pipes/min_size_validation.pipe';
 
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-
-@ApiBody({ type: CreateUserWithFileDto })
+  @ApiBody({ type: CreateUserWithFileDto })
   @Post('/create')
   @UseInterceptors(FileInterceptor('file', { storage: multer.memoryStorage() }))
   @ApiConsumes('multipart/form-data')
   @ApiOperation({ summary: 'Subir un archivo' })
   @ApiResponse({ status: 201, description: 'Archivo y usuario subido' })
-  create(@Body() createUserDto: CreateUserDto, @UploadedFile(new MinSizeValidationPipe()) file: Express.Multer.File ) {
-    
+  create(
+    @Body() createUserDto: CreateUserDto,
+    @UploadedFile(new MinSizeValidationPipe()) file: Express.Multer.File,
+  ) {
     return this.usersService.create(createUserDto, file);
   }
 
-  
   // @UseGuards(AuthGuard('jwt'), RolesGuard)
   // @Roles('OWNER')
   // @ApiBearerAuth()
