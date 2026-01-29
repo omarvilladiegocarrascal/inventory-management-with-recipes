@@ -5,16 +5,13 @@ import {
   DB_PORT,
   DB_NAME,
   DB_USERNAME,
+  DB_URL,
 } from 'src/helpers/development-env';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
 const config: DataSourceOptions = {
   type: 'postgres',
-  database: DB_NAME,
-  host: DB_HOST,
-  port: Number(DB_PORT),
-  username: DB_USERNAME,
-  password: DB_PASSWORD,
+  url: DB_URL,
   entities: ['dist/**/*.entity{.ts,.js}'],
   migrations: ['dist/migrations/*{.ts,.js}'],
   logging: true,
