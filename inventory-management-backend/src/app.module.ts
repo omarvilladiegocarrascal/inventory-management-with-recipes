@@ -5,24 +5,24 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import typeorm from './config/typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './modules/users/users.module';
-import { BatchesModule } from './modules/batches/batches.module';
 import { CostPricesModule } from './modules/cost_prices/cost_prices.module';
-import { ProductSuppliersModule } from './modules/product_suppliers/product_suppliers.module';
-import { ProductUnitModule } from './modules/product_units/product_unit.module';
-import { ProductsModule } from './modules/products/products.module';
-import { RecipeModule } from './modules/recipe/recipe.module';
-import { RecipeProductsModule } from './modules/recipe_products/recipe_products.module';
-import { SalesModule } from './modules/sales/sales.module';
-import { SaleItemsModule } from './modules/sale_items/sale_items.module';
-import { SalePricesModule } from './modules/sale_prices/sale_prices.module';
-import { SellableItemsModule } from './modules/sellable_items/sellable_items.module';
-import { StockMovementsModule } from './modules/stock_movements/stock_movements.module';
-import { SupplierProductModule } from './modules/supplier_products/supplier_product.module';
-import { SuppliersModule } from './modules/suppliers/suppliers.module';
-import { UnitsModule } from './modules/units/units.module';
 import { UsersRefreshTokensModule } from './modules/users_refresh_tokens/users_refresh_tokens.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { FileUploadModule } from './modules/file_upload/file_upload.module';
+import { BatchesModule } from './modules/inventory/batches/batches.module';
+import { ProductSuppliersModule } from './modules/inventory/product_suppliers/product_suppliers.module';
+import { ProductUnitModule } from './modules/inventory/product_units/product_unit.module';
+import { ProductsModule } from './modules/inventory/products/products.module';
+import { RecipeModule } from './modules/recipes/recipes/recipe.module';
+import { RecipeProductsModule } from './modules/recipes/recipe_products/recipe_products.module';
+import { SalesModule } from './modules/sales/sales/sales.module';
+import { SaleItemsModule } from './modules/sales/sale_items/sale_items.module';
+import { SalePricesModule } from './modules/sales/sale_prices/sale_prices.module';
+import { SellableItemsModule } from './modules/sales/sellable_items/sellable_items.module';
+import { StockMovementsModule } from './modules/inventory/stock_movements/stock_movements.module';
+import { SupplierProductModule } from './modules/inventory/supplier_products/supplier_product.module';
+import { SuppliersModule } from './modules/inventory/suppliers/suppliers.module';
+import { UnitsModule } from './modules/inventory/units/units.module';
+import { FileUploadModule } from './modules/files/file_upload/file_upload.module';
 
 @Module({
   imports: [
@@ -53,7 +53,7 @@ import { FileUploadModule } from './modules/file_upload/file_upload.module';
     UnitsModule,
     UsersRefreshTokensModule,
     AuthModule,
-    FileUploadModule
+    FileUploadModule,
   ],
   controllers: [AppController],
   providers: [AppService],
